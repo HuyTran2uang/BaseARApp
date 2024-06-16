@@ -137,18 +137,25 @@ public class OculusIAP : MonoBehaviourSingleton<OculusIAP>
         switch (input)
         {
             case "price_2":
+                CatchStickMachine.Instance.PlayTurn += 2;
                 break;
             case "price_5":
+                CatchStickMachine.Instance.PlayTurn += 5;
                 break;
             case "price_10":
+                CatchStickMachine.Instance.PlayTurn += 10;
                 break;
             case "price_20":
+                CatchStickMachine.Instance.PlayTurn += 20;
                 break;
             case "price_50":
+                CatchStickMachine.Instance.PlayTurn += 50;
                 break;
             case "price_100":
+                CatchStickMachine.Instance.PlayTurn += 100;
                 break;
             case "price_200":
+                CatchStickMachine.Instance.PlayTurn += 200;
                 break;
             default:
                 break;

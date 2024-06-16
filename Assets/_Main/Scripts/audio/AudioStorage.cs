@@ -1,6 +1,10 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Audio Storage")]
+[CreateAssetMenu]
 public class AudioStorage : ScriptableObject
 {
     private static AudioStorage _instance;
@@ -10,7 +14,7 @@ public class AudioStorage : ScriptableObject
         get
         {
             if (_instance == null)
-                _instance = Resources.Load<AudioStorage>("Audio Storage");
+                _instance = Resources.Load<AudioStorage>("Data/Audio Storage");
             return _instance;
         }
     }

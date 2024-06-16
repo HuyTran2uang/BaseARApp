@@ -7,17 +7,6 @@ public class Spawner<T> : MonoBehaviourSingleton<Spawner<T>> where T : MonoBehav
     [SerializeField] protected Transform _container;
     protected Queue<T> _pool = new Queue<T>();
     protected List<T> _used = new List<T>();
-    protected Transform Container
-    {
-        get
-        {
-            if (_container == null)
-            {
-                _container = GetComponent<Transform>();
-            }
-            return _container;
-        }
-    }
 
     public T Spawn()
     {
@@ -29,7 +18,7 @@ public class Spawner<T> : MonoBehaviourSingleton<Spawner<T>> where T : MonoBehav
         }
         else
         {
-            T item = Instantiate(_prefab, Container);
+            T item = Instantiate(_prefab, _container);
             _used.Add(item);
             return item;
         }
@@ -43,7 +32,7 @@ public class Spawner<T> : MonoBehaviourSingleton<Spawner<T>> where T : MonoBehav
 
     public void Clear()
     {
-        for (int i = _used.Count - 1; i == 0; i--)
+        for (int i = _used.Count - 1; i >= 0; i--)
         {
             _used[i].gameObject.SetActive(false);
         }

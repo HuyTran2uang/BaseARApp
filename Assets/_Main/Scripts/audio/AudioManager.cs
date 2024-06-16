@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviourSingleton<AudioManager>
 {
     Dictionary<AudioName, AudioData> _audioDict = new Dictionary<AudioName, AudioData>();
+    bool _isOpenMusic = true, _isOpenSound = true;
 
     private void Awake()
     {
@@ -21,17 +20,26 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>
     public void PlayAudio(AudioName name, float volume = 1)
     {
         AudioData audioData = _audioDict[name];
-        audioData.Play(false, volume);
+        bool mute = (audioData.Audio.type == AudioType.Music) ? !_isOpenMusic : !_isOpenSound;
+        audioData.Play(mute, volume);
     }
 
     public void PlayAudioOnceShot(AudioName name, float volume = 1)
     {
         AudioData audioData = _audioDict[name];
-        audioData.PlayOnceShot(false, volume);
+        bool mute = (audioData.Audio.type == AudioType.Music) ? !_isOpenMusic : !_isOpenSound;
+        audioData.PlayOnceShot(mute, volume);
     }
 
     public void PauseAudio(AudioName name)
     {
         _audioDict[name].Pause();
     }
+
+    #region public function audio
+    public void PlaySoundClickButton()
+    {
+        PlayAudioOnceShot(AudioName.Click);
+    }
+    #endregion
 }
