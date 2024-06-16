@@ -231,13 +231,13 @@ public class LocomotionTeleport : MonoBehaviour
 
     /// <summary>
     /// Created at runtime, this gameobject is used to track where the player will teleport.
-    /// The actual position depends on the type of Aim Handler and Target Handler that is active.
+    /// The actual position depends on the type of Aim Handler and TargetCtrl Handler that is active.
     /// Aim Handlers:
     /// * Laser: player capsule swept along aim ray until it hits terrain or valid target.
     /// * Parabolic: player capsule swept along a series of line segments approximating a parabolic curve until it hits terrain or valid target.
-    /// Target Handlers:
+    /// TargetCtrl Handlers:
     /// * NavMesh = Destination only valid if it lies within the nav mesh.
-    /// * Node = Destination valid if within radius of a teleport node. Target is invalidated when aim leaves the node radius.
+    /// * Node = Destination valid if within radius of a teleport node. TargetCtrl is invalidated when aim leaves the node radius.
     /// * Physical = Any terrain is valid.
     /// </summary>
     private TeleportDestination _teleportDestination;
@@ -525,7 +525,7 @@ public class LocomotionTeleport : MonoBehaviour
     public event Action EnterStateAim;
 
     /// <summary>
-    /// Aim and Target handlers are responsible for populating the AimData with the relevant aim data,
+    /// Aim and TargetCtrl handlers are responsible for populating the AimData with the relevant aim data,
     /// which is used for a number of purposes within the teleport system.
     /// </summary>
     public event Action<AimData> UpdateAimData;

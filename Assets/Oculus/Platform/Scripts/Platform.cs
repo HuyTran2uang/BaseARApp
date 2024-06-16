@@ -31,7 +31,7 @@ namespace Oculus.Platform
     }
 
     private static string getAppID(string appId = null) {
-      string configAppID = GetAppIDFromConfig();
+            string configAppID = "8157195320978897"; //GetAppIDFromConfig();
       if (String.IsNullOrEmpty(appId))
       {
         if (String.IsNullOrEmpty(configAppID))

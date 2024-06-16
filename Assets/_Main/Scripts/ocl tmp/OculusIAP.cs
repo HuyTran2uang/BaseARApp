@@ -137,18 +137,25 @@ public class OculusIAP : MonoBehaviourSingleton<OculusIAP>
         switch (input)
         {
             case "price_2":
+                GameManager.Instance.Turns += 2;
                 break;
             case "price_5":
+                GameManager.Instance.Turns += 5;
                 break;
             case "price_10":
+                GameManager.Instance.Turns += 10;
                 break;
             case "price_20":
+                GameManager.Instance.Turns += 20;
                 break;
             case "price_50":
+                GameManager.Instance.Turns += 50;
                 break;
             case "price_100":
+                GameManager.Instance.Turns += 100;
                 break;
             case "price_200":
+                GameManager.Instance.Turns += 200;
                 break;
             default:
                 break;
