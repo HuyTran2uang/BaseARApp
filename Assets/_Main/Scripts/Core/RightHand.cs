@@ -1,8 +1,10 @@
+using Oculus.Interaction;
 using UnityEngine;
 
 public class RightHand : MonoBehaviour
 {
     private bool _isHandPressing;
+    public GameObject rightHandController;
 
     private void Update()
     {
@@ -11,15 +13,21 @@ public class RightHand : MonoBehaviour
 
     private void Input()
     {
-        float primaryHandTrigger = OVRInput.Get(OVRInput.RawAxis1D.RHandTrigger);
+        float primaryHandTrigger = OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger);
 
         if (primaryHandTrigger > .9f)
         {
             if (!_isHandPressing)
             {
-                _isHandPressing = true;
-                Ball.Instance.transform.SetParent(transform);
-                Ball.Instance.Select(transform);
+                if (GameManager.Instance.Turns > 0)
+                {
+                    GameManager.Instance.Turns--;
+                    _isHandPressing = true;
+                    Ball.Instance.transform.SetParent(transform);
+                    Ball.Instance.Select(transform);
+                    Ball.Instance.transform.position = transform.position;
+                    rightHandController.SetActive(false);
+                }
             }
         }
 
@@ -28,6 +36,7 @@ public class RightHand : MonoBehaviour
             _isHandPressing = false;
             Ball.Instance.transform.SetParent(null);
             Ball.Instance.Unselect();
+            rightHandController.SetActive(true);
         }
     }
 }

@@ -28,12 +28,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         if (PlayerPrefs.HasKey("turns"))
         {
             int oldTurns = PlayerPrefs.GetInt("turns");
-            Turns = IsNewDay() ? oldTurns + 3 : oldTurns;
+            Turns = IsNewDay() ? oldTurns + 10 : oldTurns;
         }
         else
         {
             // new game
-            Turns = 3;
+            Turns = 10;
         }
     }
 
@@ -54,10 +54,5 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
             }
         }
         return isNewDay;
-    }
-
-    private void Update()
-    {
-
     }
 }

@@ -4,9 +4,11 @@ public class Ball : MonoBehaviourSingleton<Ball>, IItem
 {
     public Rigidbody rb;
     public int checkPoint;
-    private Vector3 oldPos, newPos;
-
+    private Vector3 oldPos;
+    private float timer;
     public bool IsSelected { get; private set; }
+    private float force;
+    private Vector3 direction;
 
     public void Select(Transform selecter)
     {
@@ -14,7 +16,6 @@ public class Ball : MonoBehaviourSingleton<Ball>, IItem
         IsSelected = true;
         rb.isKinematic = true;
         oldPos = transform.position;
-        newPos = oldPos;
     }
 
     public void Unselect()
@@ -23,18 +24,25 @@ public class Ball : MonoBehaviourSingleton<Ball>, IItem
         IsSelected = false;
         rb.isKinematic = false;
         checkPoint = 0;
+        rb.AddForce(direction * 2 * force / Time.deltaTime, ForceMode.Impulse);
+    }
+
+    private void CachePos()
+    {
+        force = Vector3.Distance(oldPos, transform.position);
+        direction = Vector3.Normalize(transform.position - oldPos);
+        oldPos = transform.position;
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void FixedUpdate()
     {
         if (!IsSelected) return;
-        newPos = transform.position;
-        Vector3 direction = Vector3.Normalize(newPos - oldPos);
-        float force = (newPos - oldPos).magnitude / Time.deltaTime;
-
-        rb.AddForce(direction * force, ForceMode.Impulse);
-
-        oldPos = newPos;
+        CachePos();
     }
 
     private void OnCollisionEnter(Collision collision)
