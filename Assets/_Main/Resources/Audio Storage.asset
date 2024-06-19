@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab76324041e44ff46b74f87651c34cc2, type: 3}
   m_Name: Audio Storage
   m_EditorClassIdentifier: 
-  _audios: []
+  _audios:
+  - name: 2
+    type: 0
+    clip: {fileID: 8300000, guid: 471d655e6084bdf4bbdc35440cd4ddb2, type: 3}
+    loop: 0
+  - name: 1
+    type: 0
+    clip: {fileID: 8300000, guid: 0e94378ca3835fc4a8bb9885265ebda9, type: 3}
+    loop: 0
+  - name: 0
+    type: 0
+    clip: {fileID: 8300000, guid: f2c4d7bcfd6a2044b8e1c4d4acdf50aa, type: 3}
+    loop: 0
