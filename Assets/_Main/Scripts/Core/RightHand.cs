@@ -13,7 +13,7 @@ public class RightHand : MonoBehaviour
 
     private void Input()
     {
-        float primaryHandTrigger = OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger);
+        float primaryHandTrigger = OVRInput.Get(OVRInput.RawAxis1D.RHandTrigger);
 
         if (primaryHandTrigger > .9f)
         {
