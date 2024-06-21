@@ -7,13 +7,13 @@ using UnityEngine;
 public class OculusIAP : MonoBehaviourSingleton<OculusIAP>
 {
     string[] skus;
-    List<Sku> skusList;
+    List<Sku> skusList; 
 
     // Dictionary to keep track of SKUs being consumed
     private Dictionary<UInt64, string> skuDictionary = new Dictionary<UInt64, string>();
     void Start()
     {
-        skusList = new List<Sku>();
+        skusList= new List<Sku>();
 
         skusList.Add(new Sku("price_1", 1));
         skusList.Add(new Sku("price_2", 2));
@@ -22,7 +22,7 @@ public class OculusIAP : MonoBehaviourSingleton<OculusIAP>
         skusList.Add(new Sku("price_20", 20));
         skusList.Add(new Sku("price_30", 30));
         skusList.Add(new Sku("price_40", 40));
-        skusList.Add(new Sku("price_50", 50));
+        skusList.Add(new Sku("price_50", 50));        
         skusList.Add(new Sku("price_100", 100));
         skusList.Add(new Sku("price_150", 150));
         skusList.Add(new Sku("price_200", 200));
@@ -30,7 +30,7 @@ public class OculusIAP : MonoBehaviourSingleton<OculusIAP>
         skus = new string[skusList.Count];
         for (int i = 0; i < skusList.Count; i++)
         {
-            skus[i] = skusList[i].price;
+            skus[i] = skusList[i].price;    
         }
 
         ///Đầu tiên gọi hàm này
@@ -40,8 +40,8 @@ public class OculusIAP : MonoBehaviourSingleton<OculusIAP>
 
     }
     public Sku GetSku(string sku)
-    {
-        if (skusList.Exists(x => x.sku == sku))
+    { 
+        if(skusList.Exists(x => x.sku == sku ))
             return skusList.Find(x => x.sku == sku);
 
         return null;
@@ -141,26 +141,37 @@ public class OculusIAP : MonoBehaviourSingleton<OculusIAP>
         switch (input)
         {
             case "price_1":
+                GameManager.Instance.Turns += 1;
                 break;
             case "price_2":
+                GameManager.Instance.Turns += 2;
                 break;
             case "price_5":
+                GameManager.Instance.Turns += 5;
                 break;
             case "price_10":
+                GameManager.Instance.Turns += 10;
                 break;
             case "price_20":
+                GameManager.Instance.Turns += 20;
                 break;
             case "price_30":
+                GameManager.Instance.Turns += 30;
                 break;
             case "price_40":
+                GameManager.Instance.Turns += 40;
                 break;
             case "price_50":
+                GameManager.Instance.Turns += 50;
                 break;
             case "price_100":
+                GameManager.Instance.Turns += 100;
                 break;
             case "price_150":
+                GameManager.Instance.Turns += 150;
                 break;
             case "price_200":
+                GameManager.Instance.Turns += 200;
                 break;
             default:
                 break;
@@ -222,8 +233,7 @@ public class Sku
     }
     public string price
     {
-        get
-        {
+        get {
             switch (sku)
             {
                 case "price_2":
@@ -244,6 +254,6 @@ public class Sku
                     return "0.00";
             }
         }
-
+        
     }
 }
