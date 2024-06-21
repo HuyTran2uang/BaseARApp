@@ -7,26 +7,30 @@ using UnityEngine;
 public class OculusIAP : MonoBehaviourSingleton<OculusIAP>
 {
     string[] skus;
-    List<Sku> skusList; 
+    List<Sku> skusList;
 
     // Dictionary to keep track of SKUs being consumed
     private Dictionary<UInt64, string> skuDictionary = new Dictionary<UInt64, string>();
     void Start()
     {
-        skusList= new List<Sku>();
+        skusList = new List<Sku>();
 
+        skusList.Add(new Sku("price_1", 1));
         skusList.Add(new Sku("price_2", 2));
         skusList.Add(new Sku("price_5", 5));
         skusList.Add(new Sku("price_10", 10));
         skusList.Add(new Sku("price_20", 20));
-        skusList.Add(new Sku("price_50", 50));        
+        skusList.Add(new Sku("price_30", 30));
+        skusList.Add(new Sku("price_40", 40));
+        skusList.Add(new Sku("price_50", 50));
         skusList.Add(new Sku("price_100", 100));
+        skusList.Add(new Sku("price_150", 150));
         skusList.Add(new Sku("price_200", 200));
 
         skus = new string[skusList.Count];
         for (int i = 0; i < skusList.Count; i++)
         {
-            skus[i] = skusList[i].price;    
+            skus[i] = skusList[i].price;
         }
 
         ///Đầu tiên gọi hàm này
@@ -36,8 +40,8 @@ public class OculusIAP : MonoBehaviourSingleton<OculusIAP>
 
     }
     public Sku GetSku(string sku)
-    { 
-        if(skusList.Exists(x => x.sku == sku ))
+    {
+        if (skusList.Exists(x => x.sku == sku))
             return skusList.Find(x => x.sku == sku);
 
         return null;
@@ -136,6 +140,8 @@ public class OculusIAP : MonoBehaviourSingleton<OculusIAP>
     {
         switch (input)
         {
+            case "price_1":
+                break;
             case "price_2":
                 break;
             case "price_5":
@@ -144,9 +150,15 @@ public class OculusIAP : MonoBehaviourSingleton<OculusIAP>
                 break;
             case "price_20":
                 break;
+            case "price_30":
+                break;
+            case "price_40":
+                break;
             case "price_50":
                 break;
             case "price_100":
+                break;
+            case "price_150":
                 break;
             case "price_200":
                 break;
@@ -210,7 +222,8 @@ public class Sku
     }
     public string price
     {
-        get {
+        get
+        {
             switch (sku)
             {
                 case "price_2":
@@ -231,6 +244,6 @@ public class Sku
                     return "0.00";
             }
         }
-        
+
     }
 }
