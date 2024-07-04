@@ -1,37 +1,82 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class TargetContrl : MonoBehaviour
 {
     public Transform center;
     public float radius10, radius9, radius8, radius7;
+    public bool isShowing;
+    private Coroutine _onCoroutine;
+    public bool isHiding;
+
+    public void Init(float duration)
+    {
+        isShowing = true;
+        GetComponent<Collider>().enabled = true;
+        transform.DORotate(new Vector3(0, 0, 0), .5f).OnComplete(() =>
+        {
+            isHiding = false;
+            _onCoroutine = StartCoroutine(Simple.Utilities.IEDelayCall(duration, () =>
+            {
+                Hide();
+            }));
+        });
+    }
+
+    private void Hide()
+    {
+        isHiding = true;
+        transform.DORotate(new Vector3(0, 0, -90), .2f).OnComplete(() =>
+        {
+            GameManager.Instance.End();
+        });
+    }
+
+    private void Target()
+    {
+        if (_onCoroutine != null)
+        {
+            StopCoroutine(_onCoroutine);
+        }
+        isHiding = true;
+        transform.DORotate(new Vector3(0, 0, -90), .2f).OnComplete(() =>
+        {
+            GameManager.Instance.Target();
+        });
+    }
 
     public void CheckScore(Transform tran)
     {
+        if (isHiding) return;
+        GetComponent<Collider>().enabled = false;
+        transform.DORotate(new Vector3(0, 0, -90), .5f).OnComplete(() =>
+        {
+            isShowing = false;
+        });
         var pos = tran.position;
         pos.x = center.position.x;
         float dis = Vector3.Distance(pos, center.position);
         if (dis <= radius10)
         {
-            ScoreTable.Instance.AddScore(10);
+            ScoreManager.Instance.Score += 10;
         }
         else if (dis > radius10 && dis <= radius9)
         {
-            ScoreTable.Instance.AddScore(9);
+            ScoreManager.Instance.Score += 9;
         }
         else if (dis > radius9 && dis <= radius8)
         {
-            ScoreTable.Instance.AddScore(8);
+            ScoreManager.Instance.Score += 8;
         }
         else if (dis > radius8 && dis <= radius7)
         {
-            ScoreTable.Instance.AddScore(7);
+            ScoreManager.Instance.Score += 7;
         }
         else
         {
-            ScoreTable.Instance.AddScore(0);
+            ScoreManager.Instance.Score += 0;
         }
+        Target();
     }
 
     public bool isShowGizmos;

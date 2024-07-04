@@ -1,18 +1,19 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
-    public int bullets;
     [SerializeField] private int _turns;
     [SerializeField] private TMP_Text turnText;
     public GameObject righthandCtrl;
     private bool isPlaying;
     public Button playBtn;
+    public TargetContrl[] _targetCtrls;
+    private int _round;
+    private int _targetCount;
 
     private void Awake()
     {
@@ -72,17 +73,46 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         AudioManager.Instance.PlayAudioOnceShot(AudioName.start);
         righthandCtrl.SetActive(false);
         playBtn.gameObject.SetActive(false);
+        ScoreManager.Instance.Init();
+        _round = 0;
         StartCoroutine(Simple.Utilities.IEDelayCall(2, () =>
         {
-            ScoreTable.Instance.Init();
-            bullets = 10;
+            //ScoreTable.Instance.Init();
+            StartTarget();
+        }));
+    }
+
+    private void StartTarget()
+    {
+        _targetCount = 5;
+        float dur = 5 - _round * .5f;
+        dur = dur >= .5f ? dur : .5f;
+        _targetCtrls.ToList().ForEach(i => i.Init(dur));
+    }
+
+    public void NextRound()
+    {
+        _round++;
+        StartCoroutine(Simple.Utilities.IEDelayCall(2f, () =>
+        {
+            StartTarget();
         }));
     }
 
     public void End()
     {
+        if(isPlaying) return;
         isPlaying = false;
         playBtn.gameObject.SetActive(true);
         righthandCtrl.SetActive(true);
+    }
+
+    public void Target()
+    {
+        _targetCount--;
+        if (_targetCount <= 0)
+        {
+            NextRound();
+        }
     }
 }
