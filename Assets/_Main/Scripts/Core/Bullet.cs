@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
 
     public void Init(Vector3 direction)
     {
-        rb.velocity = direction * 50;
+        rb.velocity = direction * 150;
         gameObject.SetActive(true);
         onDelayHideCoroutine = StartCoroutine(Simple.Utilities.IEDelayCall(5, () =>
         {

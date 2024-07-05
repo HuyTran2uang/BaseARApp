@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -67,20 +65,22 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void Play()
     {
+        if (Turns <= 0) return;
         if (isPlaying) return;
         isPlaying = true;
         AudioManager.Instance.PlayAudioOnceShot(AudioName.start);
         righthandCtrl.SetActive(false);
         playBtn.gameObject.SetActive(false);
+        ScoreManager.Instance.Init();
         StartCoroutine(Simple.Utilities.IEDelayCall(2, () =>
         {
-            ScoreTable.Instance.Init();
-            bullets = 10;
+            bullets = 1;
         }));
     }
 
     public void End()
     {
+        Turns--;
         isPlaying = false;
         playBtn.gameObject.SetActive(true);
         righthandCtrl.SetActive(true);

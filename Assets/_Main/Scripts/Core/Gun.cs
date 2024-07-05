@@ -8,7 +8,7 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
         {
             if (GameManager.Instance.bullets > 0)
             {

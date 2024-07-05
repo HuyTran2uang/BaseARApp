@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Main/Scenes/Ban Cung.unity
+    path: Assets/_Main/Scenes/Ban Tia.unity
     guid: 7e0611c010ad0ba4fbadd4e4ba8bb573
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ed551912eda30a44a9318a0c8517c5ab, type: 2}

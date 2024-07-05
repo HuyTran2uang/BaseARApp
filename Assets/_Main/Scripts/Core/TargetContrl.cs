@@ -14,23 +14,23 @@ public class TargetContrl : MonoBehaviour
         float dis = Vector3.Distance(pos, center.position);
         if (dis <= radius10)
         {
-            ScoreTable.Instance.AddScore(10);
+            ScoreManager.Instance.Score += 10;
         }
         else if (dis > radius10 && dis <= radius9)
         {
-            ScoreTable.Instance.AddScore(9);
+            ScoreManager.Instance.Score += 9;
         }
         else if (dis > radius9 && dis <= radius8)
         {
-            ScoreTable.Instance.AddScore(8);
+            ScoreManager.Instance.Score += 8;
         }
         else if (dis > radius8 && dis <= radius7)
         {
-            ScoreTable.Instance.AddScore(7);
+            ScoreManager.Instance.Score += 7;
         }
         else
         {
-            ScoreTable.Instance.AddScore(0);
+            ScoreManager.Instance.Score += 0;
         }
     }
 
