@@ -68,8 +68,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void Play()
     {
+        if (Turns <= 0) return;
         if (isPlaying) return;
         isPlaying = true;
+        Turns--;
         AudioManager.Instance.PlayAudioOnceShot(AudioName.start);
         righthandCtrl.SetActive(false);
         playBtn.gameObject.SetActive(false);
@@ -101,7 +103,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void End()
     {
-        if(isPlaying) return;
+        if(!isPlaying) return;
         isPlaying = false;
         playBtn.gameObject.SetActive(true);
         righthandCtrl.SetActive(true);
