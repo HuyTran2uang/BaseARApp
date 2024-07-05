@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         righthandCtrl.SetActive(false);
         playBtn.gameObject.SetActive(false);
         ScoreManager.Instance.Init();
+        Turns--;
         StartCoroutine(Simple.Utilities.IEDelayCall(2, () =>
         {
             bullets = 1;
@@ -80,7 +81,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void End()
     {
-        Turns--;
         isPlaying = false;
         playBtn.gameObject.SetActive(true);
         righthandCtrl.SetActive(true);
