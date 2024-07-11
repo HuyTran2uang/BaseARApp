@@ -30,15 +30,15 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         {
             _turns = value;
             turnText.text = $"Turns: {Turns}";
-            PlayerPrefs.SetInt("turns", Turns);
+            PlayerPrefs.SetInt("shootpractice_turns", Turns);
         }
     }
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("turns"))
+        if (PlayerPrefs.HasKey("shootpractice_turns"))
         {
-            int oldTurns = PlayerPrefs.GetInt("turns");
+            int oldTurns = PlayerPrefs.GetInt("shootpractice_turns");
             Turns = IsNewDay() ? oldTurns + 3 : oldTurns;
         }
         else
